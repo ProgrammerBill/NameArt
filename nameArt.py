@@ -12,7 +12,8 @@ def sketch_img(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img_invert = cv2.bitwise_not(gray)
     gblur_img = cv2.GaussianBlur(img_invert,(21,21),sigmaX=0,sigmaY=0)
-    return cv2.divide(gray, 255-gblur_img, scale=256)
+    color_dodged = cv2.divide(gray, 255-gblur_img, scale=256)
+    return 255 - cv2.divide(255-color_dodged, 255-gblur_img, scale=256)
 
 def show_image(name, img):
     cv2.namedWindow(name)
